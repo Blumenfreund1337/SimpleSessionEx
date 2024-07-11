@@ -1,3 +1,21 @@
 This is a README that explains how to use the short Library that i created
 
 after importing the functions_v7 data you get access to a bunch of functions that make it easier to work with the ONE and brainbox.io API
+
+first you create an Object of the class Session by calling createSession() with the Parameters you want to search for 
+im shortly gonna explain every parameter:
+Roi (default : Roi = ""): Roi is short for Region of Interest and it takes an Region of the brain by the short name of the AllenAtlas for example "SNr" or "SI" 
+
+pid (default : pid = ""): the Pid is the id of the Probe, normally after my final understanding every EID, which means session ID has many PIDs but every PID has one EID. A PID looks like this: "6a7544a8-d3d4-44a1-a9c6-7f4d460feaac"
+
+POn (default : POn = False): POn is short for PrintOn and it helps to get a better understanding of what data you get, if set on True you will recieve Print in your Terminal, telling you how many Session, Cluster and Spikes where found
+
+sessNmb (default : sessNmb= 0): sessNmb is short for Session Number and is just a Number to choose for the found Sessions, for example if you find 22 Session the function will take the Session debending on the sessNmb. 0 is just the first of these Sessions
+
+EID (default : EID = ""): The EID is the Session ID and looks like PID, a long ID. Every Session has one and it helps finding the exact same session, but if your searching for a specific Probe ID it may not guarante to find the same PID every time. Watch out for that
+ 
+lab (default : lab =""): Its just if you want to filter for a specific Lab, for example "steinmetzlab"
+ 
+nmb (default : nmb =""): Its another filter option you can search for a EID, I dont understand it, it is not unique its a single number I dont know why you should search by that alone.
+
+porj (default : proj =""),starTime = "", subj="", taskProt = ""    #session search parameter 

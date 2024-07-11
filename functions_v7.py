@@ -99,7 +99,7 @@ class Session:
         
     def getStimOnOff(self):
         conStims = []
-        for i in range(0,len(self.trials["stimOntimes"])):
+        for i in range(0,len(self.trials["stimOn_times"])):
             conStims.append(self.trials['stimOn_times'][i])
             conStims.append(self.trials['stimOff_times'][i])
         return conStims
