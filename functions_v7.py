@@ -115,6 +115,13 @@ class Session:
                 start.append(fbTime[i]+2)
         return start
 
+    def getTommyStuff(self):
+        trials = self.getSpecificTrials()
+        stimOnOff = self.getStimOnOff()
+        trialStart = self.getTrialStart()
+        return [trials[0], trials[1], trials[5], stimOnOff, trials[4], trialStart] 
+    #return [goCueTRigger, feebbackTimes, rewardVolumme, stimOn/Off times, firstMovment, trialstarts]
+
 
 
 #takes in parameter and returns object of session probably takes longer when also inputtinga brain region
