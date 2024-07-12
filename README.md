@@ -2,6 +2,8 @@ This is a README that explains how to use the short Library that i created
 
 after importing the functions_v7 data you get access to a bunch of functions that make it easier to work with the ONE and brainbox.io API
 
+
+CREATESESSION()
 first you create an Object of the class Session by calling createSession() with the Parameters you want to search for 
 im shortly gonna explain every parameter:
 Roi (default : Roi = ""): Roi is short for Region of Interest and it takes an Region of the brain by the short name of the AllenAtlas for example "SNr" or "SI" 
@@ -18,4 +20,31 @@ lab (default : lab =""): Its just if you want to filter for a specific Lab, for 
  
 nmb (default : nmb =""): Its another filter option you can search for a EID, I dont understand it, it is not unique its a single number I dont know why you should search by that alone.
 
-porj (default : proj =""),starTime = "", subj="", taskProt = ""    #session search parameter 
+porj (default : proj =""): stands for Project and its Project name of the session. An example would look like that: 'ibl_neuropixel_brainwide_01' 
+
+
+starTime (default : starTime = ""): it is the Start Time of the session looking something like this for example: '2022-08-12T16:56:27.875789'
+
+
+subj (default : subj=""): This is the subject of the session. Its the Name of the little mouse that was given by the lab. A subject Name can look like this 'UCLA049tas'
+
+TaskProt (default : taskProt = ""): stands for Task Protokoll and looks like these '_iblrig_tasks_ephysChoiceWorld6.6.2' 
+
+
+
+CLASS SESSION 
+The Session Class automatically gets created when using createSession() as input it just needs the session the eid and pid of the session depending on what it is. giving in a pid gets you everything but puting in the eid could result in not having a pid because there are some Sessions that have no PIDs.
+
+The class has 9 Attributes at the moment. It saves:
+The PID and EID in a attribute each called sessPID and sessEID
+
+cluster, spikes and channel are 3 attributes that get created automatically when there is a PID found and can be called like any attribute. These three are dictionaries so for example you can call "objectname.cluster["channels"]" to get the Array with the clusters.
+
+PrintOn is a simple true false variable. its usage is explained up in createSession()
+
+sessionEIDInfo is a dictionary that has the basic SessionInfo and can look like this: {'id': '8a1cf4ef-06e3-4c72-9bc7-e1baa189841b', 'subject': 'UCLA049', 'start_time': '2022-08-12T16:56:27.875789', 'number': 1, 'lab': 'churchlandlab_ucla', 'projects': ['ibl_neuropixel_brainwide_01'], 'url': 'https://openalyx.internationalbrainlab.org/sessions/8a1cf4ef-06e3-4c72-9bc7-e1baa189841b', 'task_protocol': '_iblrig_tasks_ephysChoiceWorld6.6.2'}
+
+
+trials is a dictionary with many useful data. It works the same here, the keys are: ['stimOff_times', 'goCueTrigger_times', 'goCue_times', 'response_times', 'choice', 'stimOn_times', 'contrastLeft', 'contrastRight', 'probabilityLeft', 'feedback_times', 'feedbackType', 'rewardVolume', 'firstMovement_times', 'intervals']
+
+

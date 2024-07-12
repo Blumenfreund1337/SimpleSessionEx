@@ -23,7 +23,8 @@ ba = AllenAtlas()
 
 class Session:
     #takes in session as well as PIDs and EIDs if possible, creates spikes and clusters on its own
-    spikes = None                                   
+    spikes = None 
+    channels = None                                  
     def __init__(self, session, pid = None, eid=None, PrintOn = False):
         self.sess = session
         self.sessEID = eid
@@ -32,6 +33,7 @@ class Session:
         self.PrintOn = PrintOn
         self.cluster = self.getClusterAndSpikesOfSess()
         self.trials = one.load_object(self.sessEID,"trials")
+
         
     #method of the class that has the function of being activated when a class object is created and updates the attributes in the class object itself with the data of the choosen session    
     def getClusterAndSpikesOfSess(self):
@@ -45,6 +47,7 @@ class Session:
                 print(f"Number of Spikes is {(len(spikes['clusters']))}")
                 print(f"Number of Clusters is {len(clusters['channels'])}")
             self.spikes = spikes
+            self.channel = channels
             return cluster
                
     def getEIDinfo(self):
@@ -184,8 +187,8 @@ roi = "SNr" # Region Of Interest (acronym according to Allen Atlas)
 test = createSess(pid="5e8ac11b-959a-49ab-a6a3-8a3397e1df0e", POn=True)
 Acros = test.getAcronymInfo()
 print(Acros)
-
-
+print(test.sessEIDInfo)
+print(test.trials.keys())
 
 #test = createSess(pid = '6a7544a8-d3d4-44a1-a9c6-7f4d460feaac', POn=True)
 #print("die eid")
