@@ -182,10 +182,9 @@ def pidsofSessions(roi = ""):
 
 
 #Some test cases can be completly ignored
-
+"""
 roi = "SNr" # Region Of Interest (acronym according to Allen Atlas)
-
-""" test = createSess(pid="5e8ac11b-959a-49ab-a6a3-8a3397e1df0e", POn=True)
+test = createSess(pid="5e8ac11b-959a-49ab-a6a3-8a3397e1df0e", POn=True)
 Acros = test.getAcronymInfo()
 print(Acros)  
 
