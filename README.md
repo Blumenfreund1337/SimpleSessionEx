@@ -36,6 +36,8 @@ CLASS SESSION
 The Session Class automatically gets created when using createSession() as input it just needs the session the eid and pid of the session depending on what it is. giving in a pid gets you everything but puting in the eid could result in not having a pid because there are some Sessions that have no PIDs.
 
 The class has 9 Attributes at the moment. It saves:
+The whole session itself as the sess attribute
+
 The PID and EID in a attribute each called sessPID and sessEID
 
 cluster, spikes and channel are 3 attributes that get created automatically when there is a PID found and can be called like any attribute. These three are dictionaries so for example you can call "objectname.cluster["channels"]" to get the Array with the clusters.
@@ -47,4 +49,28 @@ sessionEIDInfo is a dictionary that has the basic SessionInfo and can look like 
 
 trials is a dictionary with many useful data. It works the same here, the keys are: ['stimOff_times', 'goCueTrigger_times', 'goCue_times', 'response_times', 'choice', 'stimOn_times', 'contrastLeft', 'contrastRight', 'probabilityLeft', 'feedback_times', 'feedbackType', 'rewardVolume', 'firstMovement_times', 'intervals']
 
+getClusterAndSpikesOfSess()
+This method is not meant to be used normaly. It is just there to run when a session object is created. It automaticly creates cluster, spikes and channel for the attribuites.
 
+getEIDinfo()
+it also is meant to just fill in the sessEIDInfo attribute by looking at the PID info
+
+getMainInfo()
+it returns [EID, PID, subject, lab] 
+
+
+getLineGraph()
+its usage is to create a Graph of the spikes to show the firing rates of them 
+events1 is a parameter that takes in the event that is supposed to be checked for example 'stimOn_times'
+
+Roi is the Region of Interest and is required so that the function can search in the clusters of the sesion for a fitting cluster
+
+figsize1 (default : figsize1 =(7,7)): is there to genererate the size of the plot. it has a fitting default but can be adjusted 
+
+
+t_before (default : t_before1 = 0.2): just the time before point zero how much of the x axes should be shown 
+
+t_after1 (default : t_after1 = 0.5): The same as 
+ bin_size1= 0.025, smoothing1=0.025, as_rate1 = True, include_raster1=False, 
+                            n_raster1= None, error_bars1='std', pethline_kwargs1 = {'color': 'blue', 'lw': 2}, errbar_kwargs1 = {'color': 'blue', 'alpha': 0.5}, 
+                            eventline_kwargs1={'color': 'black', 'alpha': 0.5}, raster_kwargs1={'color': 'black', 'lw': 0.5}, xlab ="", ylab = "", pidnmb = 1):

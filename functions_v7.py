@@ -59,7 +59,7 @@ class Session:
         #return list with sessionInfo  = [unknown EID, PID, subject, lab]
 
 
-    def getLineGraph(self, events1, Roi, figsize1 =(7,7), t_before1 = 0.2, t_after1 = 0.5, bin_size1= 0.025, smoothing1=0.025, as_rate1 = True, include_raster1=False, 
+    def getLineGraph(self, events1, Roi, figsize1 =(7,7), intervall1 = [0.2, 0.5], bin_size1= 0.025, smoothing1=0.025, as_rate1 = True, include_raster1=False, 
                             n_raster1= None, error_bars1='std', pethline_kwargs1 = {'color': 'blue', 'lw': 2}, errbar_kwargs1 = {'color': 'blue', 'alpha': 0.5}, 
                             eventline_kwargs1={'color': 'black', 'alpha': 0.5}, raster_kwargs1={'color': 'black', 'lw': 0.5}, xlab ="", ylab = "", pidnmb = 1):
         if(self.cluster != None):
@@ -69,7 +69,7 @@ class Session:
             f, ax1 = plt.subplots(1, 1, figsize= figsize1)
             peri_event_time_histogram(spike_times = self.spikes.times, spike_clusters= self.spikes.clusters, events= trials[events1],
                                     cluster_id= ROI_neurons[pidnmb],  #ehemals ROI Neurons gibt einfach eine einzige Cluster ID an such dir die mal raus 
-                                    t_before = t_before1, t_after=t_after1, bin_size= bin_size1, smoothing= smoothing1, as_rate=as_rate1,
+                                    t_before = intervall1[0], t_after=intervall1[1], bin_size= bin_size1, smoothing= smoothing1, as_rate=as_rate1,
                                     include_raster=include_raster1,n_rasters= n_raster1, error_bars = error_bars1, ax=ax1, #ax2 is a weird thing, understand it 
                                     pethline_kwargs=pethline_kwargs1,
                                     errbar_kwargs=errbar_kwargs1,
@@ -193,7 +193,8 @@ print(Acros) '''
 
 test = createSess(pid = '6a7544a8-d3d4-44a1-a9c6-7f4d460feaac', POn=True)
 print(test.getMainInfo())
-test.getLineGraph(events1='stimOn_times', Roi = roi, xlab="Time from Stimulus Onset (s)", ylab="spikes/s", include_raster1=True, t_before1=0.5, t_after1=2, error_bars1="sem",
+print(test.trials.keys())
+test.getLineGraph(events1='stimOn_times', Roi = roi, xlab="Time from Stimulus Onset (s)", ylab="spikes/s", include_raster1=True, intervall1=[0.5,2], error_bars1="sem",
                  pidnmb=2)
 plt.show() 
 
