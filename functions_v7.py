@@ -185,19 +185,14 @@ def pidsofSessions(roi = ""):
 
 roi = "SNr" # Region Of Interest (acronym according to Allen Atlas)
 
-''' test = createSess(pid="5e8ac11b-959a-49ab-a6a3-8a3397e1df0e", POn=True)
-Acros = test.getAcronymInfo()
-print(Acros) '''
-
 """ test = createSess(pid="5e8ac11b-959a-49ab-a6a3-8a3397e1df0e", POn=True)
 Acros = test.getAcronymInfo()
-print(Acros)  """
+print(Acros)  
 
 test = createSess(pid = '6a7544a8-d3d4-44a1-a9c6-7f4d460feaac', POn=True)
 print(test.getMainInfo())
 print(test.trials.keys())
 test.getLineGraph(events1='stimOn_times', Roi = roi, xlab="Time from Stimulus Onset (s)", ylab="spikes/s", include_raster1=True, intervall1=[0.5,2], error_bars1="sem",
                  pidnmb=2)
-plt.show() 
-#test
+plt.show() """
 
