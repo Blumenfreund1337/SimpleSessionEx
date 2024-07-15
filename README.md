@@ -22,9 +22,7 @@ nmb (default : nmb =""): Its another filter option you can search for a EID, I d
 
 porj (default : proj =""): stands for Project and its Project name of the session. An example would look like that: 'ibl_neuropixel_brainwide_01' 
 
-
 starTime (default : starTime = ""): it is the Start Time of the session looking something like this for example: '2022-08-12T16:56:27.875789'
-
 
 subj (default : subj=""): This is the subject of the session. Its the Name of the little mouse that was given by the lab. A subject Name can look like this 'UCLA049tas'
 
@@ -49,11 +47,14 @@ sessionEIDInfo is a dictionary that has the basic SessionInfo and can look like 
 
 trials is a dictionary with many useful data. It works the same here, the keys are: ['stimOff_times', 'goCueTrigger_times', 'goCue_times', 'response_times', 'choice', 'stimOn_times', 'contrastLeft', 'contrastRight', 'probabilityLeft', 'feedback_times', 'feedbackType', 'rewardVolume', 'firstMovement_times', 'intervals']
 
+
 getClusterAndSpikesOfSess()
 This method is not meant to be used normaly. It is just there to run when a session object is created. It automaticly creates cluster, spikes and channel for the attribuites.
 
+
 getEIDinfo()
 it also is meant to just fill in the sessEIDInfo attribute by looking at the PID info
+
 
 getMainInfo()
 it returns [EID, PID, subject, lab] 
@@ -67,10 +68,52 @@ Roi is the Region of Interest and is required so that the function can search in
 
 figsize1 (default : figsize1 =(7,7)): is there to genererate the size of the plot. it has a fitting default but can be adjusted 
 
+intervall1 (default : intervall1 = [0.2, 0.5]): is for the intervall of the graph that is getting plottet. Just give in a list for example: "[0.5, 2]
 
-t_before (default : t_before1 = 0.2): just the time before point zero how much of the x axes should be shown 
+bin_size1 (default : bin_size1= 0.025): the size of the bins
 
-t_after1 (default : t_after1 = 0.5): The same as 
- bin_size1= 0.025, smoothing1=0.025, as_rate1 = True, include_raster1=False, 
-                            n_raster1= None, error_bars1='std', pethline_kwargs1 = {'color': 'blue', 'lw': 2}, errbar_kwargs1 = {'color': 'blue', 'alpha': 0.5}, 
-                            eventline_kwargs1={'color': 'black', 'alpha': 0.5}, raster_kwargs1={'color': 'black', 'lw': 0.5}, xlab ="", ylab = "", pidnmb = 1):
+smoothing1 (default : smoothing1=0.025): is the the visual smoothing of the graphh
+
+as_rate1 (default : as_rate1 = True): Whether to use spike counts or rates in the plot
+
+include_raster1 (default : include_raster1=False): Whether to put a raster below the PETH of individual spike trains
+
+n_raster1 (default : n_raster1= None) If include_raster is True, the number of rasters to include. If None will default to plotting rasters around all provided events.
+
+error_bars1 (default : error_bars1='std'): It can be "std","sem" or "none". Defines which type of error bars to plot. Options are: – ‘std’ for 1 standard deviation – ‘sem’ for standard error of the mean – ‘none’ for only plotting the mean value 
+
+pethline_kwargs1 (default : pethline_kwargs1 = {'color': 'blue', 'lw': 2}): Dict containing line properties to define PETH plot line. Default is a blue line with weight of 2. Needs to have color. See matplotlib plot documentation for more options. 
+
+errbar_kwargs1 (default : errbar_kwargs1 = {'color': 'blue', 'alpha': 0.5}): Dict containing fill-between properties to define PETH error bars. Default is a blue fill with 50 percent opacity.. Needs to have color. See matplotlib fill_between documentation for more options. 
+
+eventline_kwargs1 (default : eventline_kwargs1={'color': 'black', 'alpha': 0.5}):  Dict containing fill-between properties to define line at event. Default is a black line with 50 percent opacity.. Needs to have color. See matplotlib vlines documentation for more options.
+
+raster_kwargs1 (default : raster_kwargs1={'color': 'black', 'lw': 0.5}): Dict containing properties defining lines in the raster plot. Default is black lines with line width of 0.5. See matplotlib vlines for more options.
+
+xlab/ylab (default : xlab =""/ylab = ""): the names for the x and y axes of the graph
+
+pidnmb (default : pidnmb = 1): The number of the PID choosen for the plot
+
+getAcronymInfo()
+returns an dictonary that is sorted by the cluster brain region and has the number of the specific cluster still saved. for example if the cluster number 207, 231 and 244 are "SNr" cluster the dictionary looks like this: {"SNr" : [207,231,244]} That way you can still find the exact cluster when going over the normal cluster list. 
+
+getSpecificTrials()
+reutrns a list with trial data in this order: ['goCueTrigger_times', 'feedback_times', 'stimOff_times, 'stimOn_times', 'firstMovement_times', 'rewardVolume']
+
+
+getStimOnOff()
+this method returns a list that has the Stim On and Off times in one list sorted with: ['stimOn', 'stimOff', 'stimOn', 'stimOff']
+
+getTrialStart()
+returns a list that contains all trial start times by looking at the feedback times and depending if the subject got a treat adds 1 second or 2
+
+getTommyStuff()
+returns a list that cpntains the following in that order [goCueTRigger, feebbackTimes, rewardVolumme, stimOn/Off times, firstMovment, trialstarts]
+
+
+getClusterPos()
+a function that returns the cluster position of an session as a list with an (X,Y,Z) tuple for each entry
+just input the cluster dictionary as a parameter 
+
+pidsofSessions()
+a simple function that just returns a bunch of IDs of the Probes. you can give in a Brain region as a parameter. That way you can get all the Probes where this brain section is included

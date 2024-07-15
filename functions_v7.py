@@ -81,7 +81,6 @@ class Session:
             Exception("No spikes and cluster there to create a Graph")
 
     def getAcronymInfo(self):
-        #funktion umbauen das Dic returned wird mit Roi1 = [....], roi2 = [....] usw
         finDic = {}
         copAcro = self.cluster['acronym'].copy()
         copAcro = set(copAcro)
@@ -193,7 +192,6 @@ print(Acros) '''
 """ test = createSess(pid="5e8ac11b-959a-49ab-a6a3-8a3397e1df0e", POn=True)
 Acros = test.getAcronymInfo()
 print(Acros)  """
-
 
 test = createSess(pid = '6a7544a8-d3d4-44a1-a9c6-7f4d460feaac', POn=True)
 print(test.getMainInfo())
