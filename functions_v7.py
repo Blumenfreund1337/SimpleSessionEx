@@ -133,7 +133,7 @@ def createSess(Roi = "", pid = "", POn = False, sessNmb= 0, EID = "",lab ="", nm
         if POn:
                 print(f'Found {len(ses1)} Sessions')   #print if POn = True
         if (sessNmb > len(ses1)):
-            raise Exception("The number of your choosing is bigger than the found sessions") #error check for bad unmatiching parameter
+            raise Exception("The session number of your choosing is bigger than the found sessions") #error check for bad unmatiching parameter
         else:
                 ses11 = ses1[sessNmb]       #continue if sessNmb is fine    
                 EID = ses11["id"]           #this 3 lines take 1 session, takes the EID and tries to find the PID with it
@@ -159,6 +159,12 @@ def createSess(Roi = "", pid = "", POn = False, sessNmb= 0, EID = "",lab ="", nm
             if (starTime != "")and (i["session_info"]["start_time"]!=starTime):continue
             if(taskProt != "")and(i["session_info"]["task_protocol"]==taskProt):continue
             finalPIDs.append(i)
+        if POn:
+            print(f'Found {len(finalPIDs)} Sessions')   #print if POn = True
+        if (sessNmb > len(finalPIDs)):
+            raise Exception("The session number of your choosing is bigger than the found sessions") #error check for bad unmatiching parameter
+        if(len(finalPIDs) == 0):
+            raise Exception("there where no sessions to your likeliness found")
         ses2 = finalPIDs[sessNmb]
         ses2EID = ses2["session_info"]
         EID = ses2EID["id"]
@@ -182,16 +188,23 @@ def pidsofSessions(roi = ""):
 
 
 #Some test cases can be completly ignored
-"""
-roi = "SNr" # Region Of Interest (acronym according to Allen Atlas)
-test = createSess(pid="5e8ac11b-959a-49ab-a6a3-8a3397e1df0e", POn=True)
-Acros = test.getAcronymInfo()
+
+""" #case 1
+test1 = createSess(pid="5e8ac11b-959a-49ab-a6a3-8a3397e1df0e", POn=True)
+Acros = test1.getAcronymInfo()
 print(Acros)  
 
-test = createSess(pid = '6a7544a8-d3d4-44a1-a9c6-7f4d460feaac', POn=True)
-print(test.getMainInfo())
-print(test.trials.keys())
-test.getLineGraph(events1='stimOn_times', Roi = roi, xlab="Time from Stimulus Onset (s)", ylab="spikes/s", include_raster1=True, intervall1=[0.5,2], error_bars1="sem",
+#case2
+roi = "SNr" # Region Of Interest (acronym according to Allen Atlas)
+test2= createSess(pid = '6a7544a8-d3d4-44a1-a9c6-7f4d460feaac', POn=True)
+print(test2.getMainInfo())
+test2.getLineGraph(events1='stimOn_times', Roi = roi, xlab="Time from Stimulus Onset (s)", ylab="spikes/s", intervall1=[0.5,2], error_bars1="sem",
                  pidnmb=2)
-plt.show() """
+plt.show() 
 
+#case3 
+roi2 = "CP"
+test3 = createSess(Roi= roi2, POn=True)
+test3.getLineGraph(events1='stimOn_times', Roi = roi2, xlab="Time from Stimulus Onset (s)", ylab="spikes/s", intervall1=[0.5,2], include_raster1=True, error_bars1="sem",
+                 pidnmb=2)
+plt.show()"""
