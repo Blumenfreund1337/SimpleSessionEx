@@ -3,7 +3,7 @@ This is a README that explains how to use the short Library that i created
 after importing the functions_v7 data you get access to a bunch of functions that make it easier to work with the ONE and brainbox.io API
 
 
-CREATESESSION()
+CREATESESSION()   trying to create a session without inputting any search filter leads to some unintentionally cases, try to avoid it 
 first you create an Object of the class Session by calling createSession() with the Parameters you want to search for 
 im shortly gonna explain every parameter:
 Roi (default : Roi = ""): Roi is short for Region of Interest and it takes an Region of the brain by the short name of the AllenAtlas for example "SNr" or "SI" 
